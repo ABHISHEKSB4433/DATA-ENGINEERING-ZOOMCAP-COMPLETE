@@ -49,3 +49,4 @@ variable "dbt_core_dataset" {
   type = string
   default = "citibike_prod"
 }
+
