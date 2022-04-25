@@ -8,7 +8,7 @@ citibike_profile:
       dataset: citibike_dev
       location: asia-south1
       threads: 4
-      keyfile: /.google/credentials/dtc-de-358222-74f5fc1eddd8.json
+      keyfile: /.google/credentials/dtc-de-358222-0c47441e2131.json
       priority: interactive
       timeout_seconds: 600
       retries: 1
@@ -19,7 +19,7 @@ citibike_profile:
       dataset: citibike_prod
       location: asia-south1
       threads: 4
-      keyfile: /.google/credentials/dtc-de-358222-74f5fc1eddd8.json
+      keyfile: /.google/credentials/dtc-de-358222-0c47441e2131.json
       priority: interactive
       timeout_seconds: 600
       retries: 1
