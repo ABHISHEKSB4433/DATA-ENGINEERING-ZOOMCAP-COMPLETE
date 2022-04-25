@@ -71,3 +71,4 @@ with DAG(
     )
 
     download_zip_file_task >> unzip_dataset_task >> format_to_parquet_task >> local_to_gcs_task >> clean_up_data_task
+

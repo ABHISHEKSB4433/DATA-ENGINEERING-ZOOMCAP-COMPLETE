@@ -23,3 +23,4 @@ with DAG(
         task_id="run_dbt_task",
         bash_command="cd /dbt && dbt deps && dbt build --profiles-dir ."
     )
+

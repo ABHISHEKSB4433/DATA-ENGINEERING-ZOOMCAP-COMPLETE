@@ -32,3 +32,4 @@ def upload_to_gcs(bucket, object_name, local_file):
 
     blob = bucket.blob(object_name)
     blob.upload_from_filename(local_file)
+    
