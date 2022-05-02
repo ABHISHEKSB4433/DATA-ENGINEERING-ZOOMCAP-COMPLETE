@@ -2,8 +2,8 @@
 
 ## Overview
 This project was executed as a part of the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp) 
-course held by [DataTalks.Club](https://datatalks.club/). The goal of this project is to apply everything we learned
-in this course and build an end-to-end data pipeline.
+course held by [DataTalks.Club](https://datatalks.club/). 
+The goal of this project is to apply everything we learned in this course and build an end-to-end data pipeline.
 
 
 The goals of the project are:
@@ -18,17 +18,25 @@ It contains information about bikes sharing in different regions of New York.
 
 The dataset includes the following columns:
 
-* Start Station Name
-* End Station Name
-* Station ID
-* Station Lat/Long
-* Trip Duration 
-* Start Time and Date
-* Stop Time and Date
-* Bike ID
-* Year of Birth
-* User Type (Customer = 24-hour pass or 3-day pass user; Subscriber = Annual Member)
-* Gender (0=unknown; 1=male; 2=female)
+* bikeid
+* birth_year
+* gender
+* usertype
+* tripduration
+* start_station_id
+* end_station_id
+* start_station_name
+* end_station_name
+* start_station_latitude
+* end_station_latitude
+* start_station_longitude
+* end_station_longitude
+* starttime
+* stoptime
+
+
+User Type (Customer = 24-hour pass or 3-day pass user; Subscriber = Annual Member)
+Gender (0=unknown; 1=male; 2=female)
 
 
 ## Problem description
@@ -172,7 +180,7 @@ Note that:
 * you should modify [profiles.yaml](dbt/profiles.yml) file according to your dataset names and credentials.
 
 ### 6.ERRORS 
-if you are getting any errors in Airflow make sure all the variables are correct and just to make sure do a find and replace on your GCP project id with my GCP project id - dtc-de-358222 with your fav IDE - Visual Studio, PyCharm, Etc   
+if you are getting any errors in Airflow make sure all the variables are correct and just to make sure, do a find and replace on your GCP project id with my GCP project id - (dtc-de-358222) with your fav IDE - Visual Studio, PyCharm, Etc   
 
 or reach out to me if there are any problems - abhisheksb.work@gmail.com
 
