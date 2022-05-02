@@ -1,37 +1,40 @@
-# Course Project - Citi Bike Trip Histories
+# DATA ENGINEERING ZOOMCAMP Project - 
 
 ## Overview
 This project was executed as a part of the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp) 
 course held by [DataTalks.Club](https://datatalks.club/). The goal of this project is to apply everything we learned
 in this course and build an end-to-end data pipeline.
 
-## Problem description
-The project is related to Citi Bike trips. Where do Citi Bikers ride? When do they ride? How far do they go? 
-Which stations are most popular? What days of the week are most rides taken on? The provided data will help you discover 
-the answers to these questions and more.
 
-The key goals of the project are:
+The goals of the project are:
 * develop a data pipeline that will help to organize data processing in a batch manner (on a monthly basis);
 * build analytical dashboard that will make it easy to discern the trends and digest the insights.
 
 The period of the data processing will cover from 2018 to 2020.
 
-## Dataset
-The initial data of Citi Bike Trip Histories could be found [here](https://s3.amazonaws.com/tripdata/index.html) in a compressed format.
+## Dataset used in the project
+The data of Citi Bike Trip Histories could be found [here](https://s3.amazonaws.com/tripdata/index.html) in a compressed format.
 It contains information about bikes sharing in different regions of New York.
 
 The dataset includes the following columns:
-* Trip Duration 
-* Start Time and Date
-* Stop Time and Date
+
 * Start Station Name
 * End Station Name
 * Station ID
 * Station Lat/Long
+* Trip Duration 
+* Start Time and Date
+* Stop Time and Date
 * Bike ID
+* Year of Birth
 * User Type (Customer = 24-hour pass or 3-day pass user; Subscriber = Annual Member)
 * Gender (0=unknown; 1=male; 2=female)
-* Year of Birth
+
+
+## Problem description
+The project is related to Citi Bike trips. Where do Citi Bikers ride? When do they ride? How far do they go? 
+Which stations are most popular? What days of the week are most rides taken on? The provided data will help you discover 
+the answers to these questions and more.
 
 ## Technologies
 We are going to use the following technologies for this project:
@@ -52,7 +55,9 @@ The end-to-end data pipeline includes the next steps:
 * dashboard creating.
 
 You can find the detailed information on the diagram below:
-![image](https://user-images.githubusercontent.com/55026550/163722189-3b5ad002-b7dc-4945-9498-911da9057a5f.png)
+![pipeline](https://user-images.githubusercontent.com/93099817/166298371-ee9cda12-4332-4906-9d17-454cc36c4e39.png)
+
+
 
 ## Tutorial
 This tutorial contains the instructions you need to follow to reproduce the project results.
@@ -60,7 +65,9 @@ This tutorial contains the instructions you need to follow to reproduce the proj
 ### 1. Pre-requisites
 Make sure you have the following pre-installed components: 
 * [GCP account](https://cloud.google.com/)
+
 * [Terraform](https://www.terraform.io/downloads)
+
 * [Docker](https://docs.docker.com/get-docker/)
 
 ### 2. Google Cloud Platform
@@ -73,7 +80,14 @@ account has all the permissions below:
    * Storage Admin
    * Storage Object Admin
    * BigQuery Admin 
+   (if you have any trouble with permissions when you are running the airflow dag, just add these permissions aswell 
+   * BigQuery Data Editor
+   * BigQuery Data Owner
+   * BigQuery Data Viewer
+   * BigQuery Job User
+   * BigQuery User )
 4. Download [SDK](https://cloud.google.com/sdk) for local setup.
+ 
 5. Set environment variable to point to your downloaded auth-keys:
 ```bash
 export GOOGLE_APPLICATION_CREDENTIALS="<path/to/your/service-account-authkeys>.json"
@@ -81,15 +95,15 @@ export GOOGLE_APPLICATION_CREDENTIALS="<path/to/your/service-account-authkeys>.j
 # Refresh token/session, and verify authentication
 gcloud auth application-default login
 ```
-6. Enable the following options under the APIs and services section:
+7. Enable the following options under the APIs and services section:
    * [Identity and Access Management (IAM) API](https://console.cloud.google.com/apis/library/iam.googleapis.com)
    * [IAM service account credentials API](https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com)
    * [Compute Engine API](https://console.developers.google.com/apis/api/compute.googleapis.com) (if you are going to use VM instance)
 
 ### 3. Terraform
-We use Terraform to build and manage GCP infrastructure. Terraform configuration files are located in the [separate folder](terraform). 
+We will use Terraform to build and manage GCP infrastructure. Terraform configuration files are located in the [separate folder](terraform),
 There are 3 configuration files: 
-* [terraform-version](terraform/terraform-version) - contains information about the installed version of Terraform;
+* [terraform-version](terraform/terraform-version) - contains information about the installed version of Terraform, i used 1.1.4 ;
 * [variables.tf](terraform/variables.tf) - contains variables to make your configuration more dynamic and flexible;
 * [main.tf](terraform/main.tf) - is a key configuration file consisting of several sections.
 
@@ -130,6 +144,7 @@ You can easily run Airflow using the following commands:
 Now you can launch Airflow UI and run the DAGs.
 > Note: If you want to stop Airflow, please type `docker-compose down` command in your terminal.
 
+
 #### Running DAGs
 Open the [http://localhost:8080/](http://localhost:8080/) address in your browser and login using `airflow` username
 and `airflow` password.
@@ -156,17 +171,28 @@ Note that:
 * you need to check that BigQuery already has areas (datasets) for staging and production dbt models (`citibike_dev` and `citibike_prod` in our case);
 * you should modify [profiles.yaml](dbt/profiles.yml) file according to your dataset names and credentials.
 
-### 6. Google Data Studio
+### 6.ERRORS 
+if you are getting any errors in Airflow make sure all the variables are correct and just to make sure do a find and replace on your GCP project id with my GCP project id - dtc-de-358222 with your fav IDE - Visual Studio, PyCharm, Etc   
+
+or reach out to me if there are any problems - abhisheksb.work@gmail.com
+
+### 7.Google Data Studio
 When the production models are ready, you can start building a dashboard.
 
 The [dashboard](https://datastudio.google.com/s/u5AyaHHljbo) is built using Google Data Studio. The process of the such dashboard creating in Google Data Studio is described in detail in [this video](https://www.youtube.com/watch?v=39nLTs74A3E&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=43).
 
 And the final dashboard includes the following diagrams:
+* Gender distribution among the trips
 * Total trips count
-* Average trips duration per month and year
+* Total trips duration
+* User type Record count and Trip duration
 * User type distribution
-* Trips count per month and year
-* Trips count by start station on the dynamic Google map
-> Note: To build a Google map you need to create a new geo field `start_location` based on `start_station_latitude` and `start_station_longitude` parameters.
+* User type Record Count VS User type Trip duration
 
-![Citibike-trips](https://user-images.githubusercontent.com/55026550/161604025-3cacf391-ea00-485d-b42c-623ef363f7aa.png)
+### 8.MY REPORT
+from The data of Citi Bike Trip Histories from 2018 to 2020.
+![Screenshot (1001)](https://user-images.githubusercontent.com/93099817/166313537-ac36c41d-6dfa-4bfe-a946-d9f2635ed9b5.png)
+
+
+
+
