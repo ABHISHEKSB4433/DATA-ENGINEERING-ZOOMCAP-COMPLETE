@@ -89,12 +89,12 @@ account has all the permissions below:
    * Storage Object Admin
    * BigQuery Admin 
    
-   (if you have any trouble with permissions when you are running the airflow dag, just add these permissions aswell 
+   (if you have any trouble with permissions when you are running the airflow dag, just add these permissions aswell)
    * BigQuery Data Editor
    * BigQuery Data Owner
    * BigQuery Data Viewer
    * BigQuery Job User
-   * BigQuery User )
+   * BigQuery User
 4. Download [SDK](https://cloud.google.com/sdk) for local setup.
  
 5. Set environment variable to point to your downloaded auth-keys:
@@ -104,7 +104,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="<path/to/your/service-account-authkeys>.j
 # Refresh token/session, and verify authentication
 gcloud auth application-default login
 ```
-7. Enable the following options under the APIs and services section:
+6. Enable the following options under the APIs and services section:
    * [Identity and Access Management (IAM) API](https://console.cloud.google.com/apis/library/iam.googleapis.com)
    * [IAM service account credentials API](https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com)
    * [Compute Engine API](https://console.developers.google.com/apis/api/compute.googleapis.com) (if you are going to use VM instance)
