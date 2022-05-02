@@ -88,6 +88,7 @@ account has all the permissions below:
    * Storage Admin
    * Storage Object Admin
    * BigQuery Admin 
+   
    (if you have any trouble with permissions when you are running the airflow dag, just add these permissions aswell 
    * BigQuery Data Editor
    * BigQuery Data Owner
